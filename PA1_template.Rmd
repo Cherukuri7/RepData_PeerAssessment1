@@ -76,9 +76,20 @@ The mean total number of steps taken per day is `r as.integer(stepsmean2)`. The 
 
 ### Are there differences in activity patterns between weekdays and weekends?
 
-It is safe to assume that there would be differences in activity patterns between weekdays and weekends. To prove this hypothesis, we will create a new factor variable in the dataset with the filled-in missing values.
+To observe whether there are ny differences in activity patterns between weekdays and weekends, we will create a new factor variable with levels of 'weekday' and 'weekend' in the dataset with the filled-in missing values.
 
 ```{r weekdays, echo=TRUE}
+dat2$date<-as.Date(dat2$date)
+dat2$day <- factor(weekdays(dat2$date) %in% c("Saturday","Sunday"),
+labels=c("weekday","weekend"), ordered=FALSE)
+averagesteps2<-aggregate(dat2$steps,by=list(interval=dat2$interval,day=dat2$day),mean)
+
+# create plot
+library(ggplot2)
+g<-ggplot(averagesteps2,aes(interval,x))
+p<-g+geom_line()+facet_grid(day~.)+labs(title="Daily Activity Pattern",x="Interval",y="Number of Steps")
+print(p)
+
 
 ```
-
+It appears that the activity reaches a peek in the morning on the weekdays, the activity is more uniform throughout the day on the weekends.
