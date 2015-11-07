@@ -29,7 +29,7 @@ rug(stepsPerDay$steps)
 stepsmean<-mean(stepsPerDay$steps)
 stepsmedian<-median(stepsPerDay$steps)
 ```
-The mean total number of steps taken per day is 10766. The median is 10765.
+The mean total number of steps taken per day is **10766**. The median is **10765**.
 
 ### What is the average daily activity pattern?
 A time series plot of the 5-minute interval on x-axis and the average number of steps taken, averaged across all days is made to illustrate the daily activity pattern.
@@ -49,7 +49,7 @@ plot(interval,steps,type="l",
 peak<-averagesteps[which(averagesteps$steps ==max(averagesteps$steps)),]
 ```
 
-The line graph indicates that the maximum number of steps, 206, are taken at 5-minute interval of 835.
+The line graph indicates that the maximum number of steps, **206**, are taken at 5-minute interval of **835**.
 
 ### Imputing missing Values
 The activity dataset contains some missing values which may affect some calculations and summaries of the data. We will first calculate and report total number of missing values.
@@ -58,7 +58,7 @@ The activity dataset contains some missing values which may affect some calculat
 ```r
 countNAs<-sum(!complete.cases(dat))
 ```
-The total number of rows with missing values (NA s) is 2304.
+The total number of rows with missing values (NA s) is **2304**.
 
 Since these missing values affect summaries, we will create a new dataset that is equal to original dataset and fill in missing values. The strategy to fill in the values is essentially averaging the steps for the same 5-minute interval.
 
@@ -89,7 +89,7 @@ stepsmedian2<-median(stepsPerDay_dat2$steps)
 ```
 When compared to original histogram, the revised dataset results in higher frequency in the middle (larger number of observations) which is due to filling in the missing values with average values.
 
-The mean total number of steps taken per day is 10766. The median is 10766. The estimates of the total daily number of steps remained very similar because we replaced all missing values with the average values for each 5-minute interval.
+The mean total number of steps taken per day is **10766**. The median is **10766**. The estimates of the total daily number of steps remained very similar because we replaced all missing values with the average values for each 5-minute interval.
 
 ### Are there differences in activity patterns between weekdays and weekends?
 
@@ -104,10 +104,19 @@ averagesteps2<-aggregate(dat2$steps,by=list(interval=dat2$interval,day=dat2$day)
 
 # create plot
 library(ggplot2)
+```
+
+```
+## Find out what's changed in ggplot2 with
+## news(Version == "1.0.1", package = "ggplot2")
+```
+
+```r
 g<-ggplot(averagesteps2,aes(interval,x))
 p<-g+geom_line()+facet_grid(day~.)+labs(title="Daily Activity Pattern",x="Interval",y="Number of Steps")
 print(p)
 ```
 
 ![plot of chunk weekdays](figure/weekdays-1.png) 
+
 It appears that the activity reaches a peek in the morning on the weekdays, the activity is more uniform throughout the day on the weekends.

@@ -24,7 +24,7 @@ stepsmean<-mean(stepsPerDay$steps)
 stepsmedian<-median(stepsPerDay$steps)
 
 ````
-The mean total number of steps taken per day is `r as.integer(stepsmean)`. The median is `r as.integer(stepsmedian)`.
+The mean total number of steps taken per day is **`r as.integer(stepsmean)`**. The median is **`r as.integer(stepsmedian)`**.
 
 ### What is the average daily activity pattern?
 A time series plot of the 5-minute interval on x-axis and the average number of steps taken, averaged across all days is made to illustrate the daily activity pattern.
@@ -38,7 +38,7 @@ plot(interval,steps,type="l",
 peak<-averagesteps[which(averagesteps$steps ==max(averagesteps$steps)),]
 ```
 
-The line graph indicates that the maximum number of steps, `r as.integer(peak$steps)`, are taken at 5-minute interval of `r peak$interval`.
+The line graph indicates that the maximum number of steps, **`r as.integer(peak$steps)`**, are taken at 5-minute interval of **`r peak$interval`**.
 
 ### Imputing missing Values
 The activity dataset contains some missing values which may affect some calculations and summaries of the data. We will first calculate and report total number of missing values.
@@ -46,7 +46,7 @@ The activity dataset contains some missing values which may affect some calculat
 ```{r nas,echo=TRUE}
 countNAs<-sum(!complete.cases(dat))
 ```
-The total number of rows with missing values (NA s) is `r countNAs`.
+The total number of rows with missing values (NA s) is **`r countNAs`**.
 
 Since these missing values affect summaries, we will create a new dataset that is equal to original dataset and fill in missing values. The strategy to fill in the values is essentially averaging the steps for the same 5-minute interval.
 
@@ -72,7 +72,7 @@ stepsmedian2<-median(stepsPerDay_dat2$steps)
 ```
 When compared to original histogram, the revised dataset results in higher frequency in the middle (larger number of observations) which is due to filling in the missing values with average values.
 
-The mean total number of steps taken per day is `r as.integer(stepsmean2)`. The median is `r as.integer(stepsmedian2)`. The estimates of the total daily number of steps remained very similar because we replaced all missing values with the average values for each 5-minute interval.
+The mean total number of steps taken per day is **`r as.integer(stepsmean2)`**. The median is **`r as.integer(stepsmedian2)`**. The estimates of the total daily number of steps remained very similar because we replaced all missing values with the average values for each 5-minute interval.
 
 ### Are there differences in activity patterns between weekdays and weekends?
 
@@ -92,4 +92,5 @@ print(p)
 
 
 ```
+
 It appears that the activity reaches a peek in the morning on the weekdays, the activity is more uniform throughout the day on the weekends.
